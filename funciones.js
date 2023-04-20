@@ -19,19 +19,18 @@ function CargarPokemones() {
         const { name, url } = pokemon;
 
         document.querySelector("#listado").innerHTML += `
-        
-         <div class="col-sm-6">
-          <div class="card border-success mb-3" style="max-width: 20rem;">
-            <div class="card-header bg-transparent border-success">${name} ${index+1}</div>
+         <div class="col-4">
+          <div class="colorCard card border-success mb-3 cardPokemon" style="max-width: 20rem;">
+            <div class="card-header bg-colorCard headCard  ">${name} </div>
              <div class="card-body text-success card-group">
-          <img src="https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${index+1}.svg">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${index+1}.png ">
+          
           
         </div>
         <div class="card-footer bg-transparent border-success"> 
         <div id="${url}"> 
-        <button onclick="DetallePokemon('${url}')">Ver detalle</button>
+        <button class="btn boton" onclick="DetallePokemon('${url}')">Ver detalle</button>
         </div>
-        <ul id="detalle"></ul>
               </div>
             </div>
           </div>
@@ -49,13 +48,13 @@ function DetallePokemon(url) {
   .then((result) => {    
       const { abilities, stats } = result.data;
       console.log(stats);
-      document.querySelector("#detalle").innerHTML += `<p> Habilidades</p>`;
+      document.getElementById(url).innerHTML += `<h4> Habilidades</h4>`;
       abilities.map(item=>{
-        document.querySelector("#detalle").innerHTML += `<p>- ${item.ability.name}</p>`;
+        document.getElementById(url).innerHTML += `<h6>- ${item.ability.name}</h6>`;
       })
-      document.querySelector("#detalle").innerHTML += `<p> Estadisticas</p>`;
+      document.getElementById(url).innerHTML += `<h4> Estadisticas</h4>`;
       stats.map(item=>{
-        document.querySelector("#detalle").innerHTML += `<p>- ${item.stat.name}:  ${item.base_stat}</p>`;
+        document.getElementById(url).innerHTML += `<h6>- ${item.stat.name}:  ${item.base_stat}</h6>`;
       })
 
 
